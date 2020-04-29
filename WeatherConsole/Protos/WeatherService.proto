@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package Weather;
+
+service WeatherService{
+	rpc GetWeather (WeatherRequest) returns (WeatherResponse);
+}
+
+
+message WeatherRequest {
+
+}
+
+message WeatherResponse {
+	repeated WeatherItem Items = 1; 
+}
+
+message WeatherItem {
+	 int64 Date = 1;
+	 int32 TempC = 2;
+	 int32 TempF = 3;
+	 string Syummary = 4;
+}
