@@ -1,4 +1,5 @@
-﻿using casln.Application.TodoLists.Commands.CreateTodoList;
+﻿using System.Collections.Generic;
+using casln.Application.TodoLists.Commands.CreateTodoList;
 using casln.Application.TodoLists.Commands.DeleteTodoList;
 using casln.Application.TodoLists.Commands.UpdateTodoList;
 using casln.Application.TodoLists.Queries.ExportTodos;
@@ -6,6 +7,7 @@ using casln.Application.TodoLists.Queries.GetTodos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using casln.Application.TodoItems.Queries;
 
 namespace casln.WebUI.Controllers
 {
@@ -52,5 +54,19 @@ namespace casln.WebUI.Controllers
 
             return NoContent();
         }
+
+
+
+        [HttpGet("Grid")]
+        public async Task<ActionResult<IEnumerable<ItemsGridDto>>> GetGrid([FromQuery] int pageIndex, [FromQuery] int pageSize)
+        {
+            return Ok(await (Mediator.Send(new GetItemsGrid()
+            {
+                PageSize = pageSize,
+                PageIndex = pageIndex
+            } )));
+        }
+
+
     }
 }
