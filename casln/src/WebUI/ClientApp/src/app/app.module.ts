@@ -17,6 +17,8 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SignalrComponent } from './signalr/signalr.component';
+import { TodoGridComponent } from './todo/todo-grid/todo-grid.component';
+import { DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { SignalrComponent } from './signalr/signalr.component';
     CounterComponent,
     FetchDataComponent,
     TodoComponent,
-    SignalrComponent
+    SignalrComponent,
+    TodoGridComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,9 +42,11 @@ import { SignalrComponent } from './signalr/signalr.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'todo', component: TodoComponent, canActivate: [AuthorizeGuard] },
+      { path: 'grid', component: TodoGridComponent , canActivate: [AuthorizeGuard] },
       { path: 'signalr', component: SignalrComponent, canActivate: [AuthorizeGuard] },
     ]),
     BrowserAnimationsModule,
+    DxDataGridModule,
     ModalModule.forRoot()
   ],
   providers: [
